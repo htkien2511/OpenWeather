@@ -17,6 +17,7 @@ class ViewController: UIViewController {
   @IBOutlet weak var windLabel: UILabel!
   @IBOutlet weak var cloudsLabel: UILabel!
   @IBOutlet weak var humidityLabel: UILabel!
+  @IBOutlet weak var iconImageView: UIImageView!
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -41,6 +42,7 @@ class ViewController: UIViewController {
           self.windLabel.text = String(weatherData.wind.speed)
           self.cloudsLabel.text = String(weatherData.clouds.all)
           self.humidityLabel.text = String(weatherData.main.humidity)
+          self.iconImageView.image = UIImage(named: weatherData.weather[0].icon)
         }
       }
     }

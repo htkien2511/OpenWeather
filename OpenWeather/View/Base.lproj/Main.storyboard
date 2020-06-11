@@ -265,6 +265,7 @@
                         <outlet property="cloudsLabel" destination="L5e-iK-gRa" id="O26-iJ-IFg"/>
                         <outlet property="descriptionLabel" destination="En1-Zv-OQT" id="38l-Dn-Qcb"/>
                         <outlet property="humidityLabel" destination="gbm-yU-VoV" id="GUg-8S-gHP"/>
+                        <outlet property="iconImageView" destination="E7A-Wz-BFn" id="TWG-SC-VSx"/>
                         <outlet property="tempLabel" destination="d30-8j-RSV" id="IOH-UI-FBG"/>
                         <outlet property="windLabel" destination="HA8-zx-Wy4" id="iGY-Uy-e3S"/>
                     </connections>
