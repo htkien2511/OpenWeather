@@ -66,8 +66,14 @@ class ViewController: UIViewController {
   }
   
   @IBAction func okTapped(_ sender: Any) {
-    let city = cityTextField.text!
+    var city = cityTextField.text!
+    while city.contains(" ") {
+      city.removeAll { (char) -> Bool in
+        char == " "
+      }
+    }
     loadData(city: city)
+    cityTextField.text = ""
   }
 }
 

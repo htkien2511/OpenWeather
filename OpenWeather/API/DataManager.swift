@@ -27,9 +27,12 @@ class DataManager {
   
   func weatherDataForLocation(city: String, completion: @escaping WeatherDataCompletion) {
     
-    let url = URL(string: "\(baseURL)&q=\(city)")!
+    let url = URL(string: "\(baseURL)&q=\(city)")
+    guard let safeURL = url else {
+      return
+    }
     
-    URLSession.shared.dataTask(with: url) { (data, response, error) in
+    URLSession.shared.dataTask(with: safeURL) { (data, response, error) in
       self.didFetchWeatherData(data: data, response: response, error: error, completion: completion)
     }.resume()
   }
