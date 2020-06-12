@@ -18,11 +18,21 @@ class ViewController: UIViewController {
   @IBOutlet weak var cloudsLabel: UILabel!
   @IBOutlet weak var humidityLabel: UILabel!
   @IBOutlet weak var iconImageView: UIImageView!
+  var cityName: String = "Da Nang"
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     
     loadData(city: "DaNang")
+    
+    let viewIsTap = UITapGestureRecognizer(target: self, action: #selector(viewIsTapped))
+    view.addGestureRecognizer(viewIsTap)
+    
+  }
+  
+  @objc func viewIsTapped() {
+    view.endEditing(true)
   }
   
   func loadData(city: String) {
@@ -35,8 +45,9 @@ class ViewController: UIViewController {
         }
       }
       else if let weatherData = WeatherData(JSON: response!) {
+        print(response!)
         DispatchQueue.main.async {
-          self.cityLabel.text = city
+          self.cityLabel.text = self.cityName
           self.tempLabel.text = String(Int(weatherData.main.temp) - 273)
           self.descriptionLabel.text = String(weatherData.weather[0].description)
           self.windLabel.text = String(weatherData.wind.speed)
@@ -69,6 +80,7 @@ class ViewController: UIViewController {
   
   @IBAction func okTapped(_ sender: Any) {
     var city = cityTextField.text!
+    cityName = city
     while city.contains(" ") {
       city.removeAll { (char) -> Bool in
         char == " "
@@ -76,6 +88,7 @@ class ViewController: UIViewController {
     }
     loadData(city: city)
     cityTextField.text = ""
+    view.endEditing(true)
   }
 }
 
