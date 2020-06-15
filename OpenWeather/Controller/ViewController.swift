@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     
     let viewIsTap = UITapGestureRecognizer(target: self, action: #selector(viewIsTapped))
     view.addGestureRecognizer(viewIsTap)
-    
+    self.cityTextField.delegate = self
   }
   
   @objc func viewIsTapped() {
@@ -78,9 +78,9 @@ class ViewController: UIViewController {
     self.present(alert, animated: true, completion: nil)
   }
   
-  @IBAction func okTapped(_ sender: Any) {
-    var city = cityTextField.text!
+  func fetchData(with city: String) {
     cityName = city
+    var city = city
     while city.contains(" ") {
       city.removeAll { (char) -> Bool in
         char == " "
@@ -88,7 +88,20 @@ class ViewController: UIViewController {
     }
     loadData(city: city)
     cityTextField.text = ""
+  }
+  
+  @IBAction func okTapped(_ sender: Any) {
+    let city = cityTextField.text!
+    fetchData(with: city)
     view.endEditing(true)
   }
 }
 
+extension ViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    let city = cityTextField.text!
+    fetchData(with: city)
+    self.view.endEditing(true)
+    return false
+  }
+}
